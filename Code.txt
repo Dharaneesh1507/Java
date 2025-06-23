@@ -1,0 +1,223 @@
+
+//	------------------------  Day - 1  ----------------------------------
+
+//  Reversing a Given String.
+	public static String reverse(String str) {
+		if (str == null || str.length() == 0)
+			return str;
+		String temp = "";
+		for (int i = str.length() - 1; i >= 0; i--) {
+			temp += str.charAt(i);
+		}
+		return temp;
+	}
+
+//	counting Vowels And Consonants
+	public static void countVowelsAndConsonants(String str) {
+		if (str == null) {
+			System.out.println("vowels : 0\nconsonants : 0");
+			return;
+		}
+		str = str.toLowerCase();
+		int vowelCount = 0, consonantCount = 0;
+
+		for (int i = 0; i < str.length(); i++) {
+			char ch = str.charAt(i);
+			if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+				vowelCount++;
+			else if (ch >= 'a' && ch <= 'z')
+				consonantCount++;
+		}
+		System.out.println("vowels : " + vowelCount);
+		System.out.println("consonants : " + consonantCount);
+	}
+
+//	check is given string contains any listed words.
+	public static boolean checkBannedWords(String msg) {
+		if (msg == null)
+			return false;
+		String[] bannedWored = { "bad", "sad", "cry" };
+		msg = msg.toLowerCase();
+		for (String word : bannedWored) {
+			if (msg.contains(word))
+				return true;
+		}
+		return false;
+	}
+
+//	checking string is a palindrome.
+	public static boolean isPalindrome(String str) {
+
+		if (str == null || str.length() == 0)
+			return false;
+		str = str.toLowerCase();
+		String temp = "";
+		for (int i = 0; i < str.length(); i++) {
+			char ch = str.charAt(i);
+			if (ch >= 'a' && ch <= 'z')
+				temp += ch;
+		}
+
+		String res = "";
+		for (int i = temp.length() - 1; i >= 0; i--) {
+			res += temp.charAt(i);
+		}
+
+		if (temp.equals(res))
+			return true;
+		else
+			return false;
+	}
+
+//	Validation of numbers in a given String
+	public static boolean otpValidation(String str) {
+
+		if (str == null || str.length() == 0)
+			return false;
+		for (int i = 0; i < str.length(); i++) {
+			char ch = str.charAt(i);
+			if (ch < '0' || ch > '9')
+				return false;
+		}
+		return true;
+	}
+
+//	-------------------  Day-2  ------------------------------
+
+//	converting given String into lowerCase without using built-in methods.
+	public static String toLowerCase(String str) {
+		if (str == null || str.length() < 1)
+			return null;
+		String res = "";
+		for (int i = 0; i < str.length(); i++) {
+			char ch = str.charAt(i);
+			if (ch >= 'A' && ch <= 'Z') {
+				ch += 32;
+				res += ch;
+			} else
+				res += ch;
+		}
+		return res;
+	}
+
+//	converting given String into upperCase without using built-in methods.
+	public static String toUpperCase(String str) {
+		if (str == null || str.length() < 1)
+			return null;
+		String res = "";
+		for (int i = 0; i < str.length(); i++) {
+			char ch = str.charAt(i);
+			if (ch >= 'a' && ch <= 'z') {
+				ch -= 32;
+				res += ch;
+			} else
+				res += ch;
+		}
+		return res;
+	}
+
+//	removing duplicate elements from a given string
+	public static String remdup(String str) {
+		str = str.toLowerCase();
+		String result = "";
+		for (int i = 0; i < str.length(); i++) {
+			char ch = str.charAt(i);
+			if (!(result.contains(ch + ""))) {
+				result += ch;
+			}
+		}
+		return result;
+	}
+
+//	finding the frequency of each character in a given String
+	public static void frequency(String str) {
+		if (str == null || str.length() < 1)
+			return;
+		str = str.toLowerCase();
+		String result = remdup(str);
+		for (int i = 0; i < result.length(); i++) {
+			char ch1 = result.charAt(i);
+			int count = 0;
+			for (int j = 0; j < str.length(); j++) {
+				char ch2 = str.charAt(j);
+				if (ch1 == ch2)
+					count++;
+			}
+			System.out.println(ch1 + "'s Frequency is " + count);
+		}
+	}
+	
+	
+	
+//	-------------------  Day-3  ------------------------------
+	
+//	storing all the palindrome strings in the string array.
+	public static boolean ispalindrome(String str) {
+		if (str == null)
+			return false;
+		int i = 0;
+		int j = str.length() - 1;
+		while (i < j) {
+			char ch1 = str.charAt(i);
+			char ch2 = str.charAt(j);
+			if (ch1 != ch2)
+				return false;
+			i++;
+			j--;
+		}
+		return true;
+
+	}
+
+	public static String[] palinStrings(String[] strArr) {
+
+		int count = 0;
+		for (String s : strArr) {
+			if (ispalindrome(s)) count++;
+		}
+		String[] res = new String[count];
+		int index = 0;
+		for (String s : strArr) {
+			if (ispalindrome(s)) res[index++] = s;
+		}
+		return res;
+	}
+
+
+//	reversing the words in a sentance 
+	public static String wordReverse(String str) {
+		String[] arr = str.split("[ ]+");
+		String res = "";
+		for(int i = arr.length-1; i>=0; i--) {
+			String s = arr[i].trim();
+			res+=s+" ";
+		}
+		return res.trim();
+	}
+	
+//	longest word in the given string
+	public static String longestWord(String str) {
+		String[] strArray = str.split("[ ]+");
+		int count = 0;
+		String res="";
+		for(String s :strArray) {
+			if(count<s.length()) {
+				count = s.length();
+				res=s;
+			}
+		}
+		return res;
+	}
+	
+	
+	
+//	fetching all the words from an array starting with given character
+	public static void matchedWords(String[] strArr, char ch) {
+
+		for (String s : strArr) {
+			if (s.toLowerCase().startsWith(ch + "".toLowerCase())) {
+				System.out.println(s);
+			}
+			else System.out.println("No match found");
+		}
+	}
